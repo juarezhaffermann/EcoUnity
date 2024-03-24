@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "838401822637",
+    "project_id": "ecounity-16b50",
+    "storage_bucket": "ecounity-16b50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838401822637:android:51c0edf8b4147d86645b24",
+        "android_client_info": {
+          "package_name": "com.example.ecounity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCECgZu6SxcUcOaXSzrCgd1UeTjkt99FbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
