@@ -3,7 +3,7 @@
     <style name="Base.Theme.EcoUnity" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">#63A01D</item>
         <item name="colorAccent">@color/white</item>
-        <item name="android:windowBackground">@drawable/new_background </item>
+        <item name="android:windowBackground">@drawable/new_background</item>
     </style>
 
     <style name="Theme.EcoUnity" parent="Base.Theme.EcoUnity" />

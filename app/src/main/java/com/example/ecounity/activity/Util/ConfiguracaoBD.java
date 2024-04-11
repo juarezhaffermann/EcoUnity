@@ -1,6 +1,5 @@
 package com.example.ecounity.activity.Util;
 
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ConfiguracaoBD {

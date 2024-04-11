@@ -1,6 +1,5 @@
 package com.example.ecounity.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,19 +35,20 @@ public class HomeActivity extends AppCompatActivity {
         CardView networkingCard = findViewById(R.id.networking_card);
         CardView adminCard = findViewById(R.id.admin_card);
 
-        setCardListener(consultCard, R.layout.activity_consulta);
-        setCardListener(projectsCard, R.layout.activity_projetos);
-        setCardListener(businessCard, R.layout.activity_vitrine);
-        setCardListener(eventCard, R.layout.activity_eventos);
-        setCardListener(networkingCard, R.layout.activity_networking);
-        setCardListener(adminCard, R.layout.activity_painel);
+        setCardListener(consultCard, ConsultaActivity.class);
+        setCardListener(projectsCard, ProjetosActivity.class);
+        setCardListener(businessCard, VitrineActivity.class);
+        setCardListener(eventCard, EventosActivity.class);
+        setCardListener(networkingCard, NetworkingActivity.class);
+        setCardListener(adminCard, PainelActivity.class);
     }
 
-    private void setCardListener(CardView cardView, final int layoutId) {
+    private void setCardListener(CardView cardView, final Class<?> activityClass) {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(layoutId);
+                Intent intent = new Intent(HomeActivity.this, activityClass);
+                startActivity(intent);
             }
         });
     }
