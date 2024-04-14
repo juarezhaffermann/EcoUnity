@@ -20,21 +20,14 @@
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Prática"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
+                     <TextView
                 android:id="@+id/tvpatrica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Economize Água"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -45,13 +38,6 @@
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Descrição:"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvdescricao"
@@ -60,7 +46,7 @@
                 android:layout_marginStart="8dp"
                 android:text="Tome banhos mais curtos, feche a torneira enquanto escova os dentes e lave a louça, e reutilize a água da chuva para regar plantas ou lavar o carro."
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -75,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="Categoria:"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -85,7 +71,7 @@
                 android:layout_marginStart="8dp"
                 android:text="Água"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 

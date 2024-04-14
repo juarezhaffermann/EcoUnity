@@ -1,15 +1,15 @@
 package com.example.ecounity.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils; // for checking empty strings
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecounity.R;
 import com.example.ecounity.activity.Util.ConfiguracaoBD;
@@ -20,7 +20,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Preencha o e-mail", Toast.LENGTH_SHORT).show();
-            return; // Exit the method if email is empty
+            return;
         }
 
         Usuario usuario = new Usuario();
@@ -93,14 +92,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Remove this line: FirebaseUser usuarioAuth = auth.getCurrentUser();
-        // Remove this line: if (usuarioAuth!= null) {
-        // Remove this line: abrirHome();
+
     }
 
     private void inicializarComponentes() {
         campoEmail = findViewById(R.id.editTextEmailLogin);
         campoSenha = findViewById(R.id.editTextSenhaLogin);
-        Button botaoAcessar = findViewById(R.id.buttonAcessar); // Assuming button has this id
+        Button botaoAcessar = findViewById(R.id.buttonAcessar);
     }
 }
