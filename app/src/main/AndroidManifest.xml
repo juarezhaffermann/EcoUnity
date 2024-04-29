@@ -13,6 +13,12 @@
         android:theme="@style/Theme.EcoUnity"
         tools:targetApi="34">
         <activity
+            android:name=".activity.Util.CriarPerfilNegocioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Util.CriarPerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ProjetosActivity"
             android:exported="false" />
         <activity

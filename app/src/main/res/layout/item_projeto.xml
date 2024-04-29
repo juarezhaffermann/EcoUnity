@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/colorAccent"
+    app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
 
     <TextView
         android:id="@+id/txtTitulo"
@@ -11,7 +14,8 @@
         android:layout_height="wrap_content"
         android:text="Título do Projeto"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/txtDescricao"
@@ -19,6 +23,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:text="Descrição do Projeto"/>
 
     <TextView
@@ -28,6 +33,7 @@
         android:layout_marginTop="5dp"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:text="Metas do projeto:"/>
 
     <TextView
@@ -36,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textSize="16sp"
+        android:textColor="@color/white"
         android:text="Metas do Projeto"/>
 
 </LinearLayout>

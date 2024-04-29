@@ -22,13 +22,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         auth = ConfiguracaoBD.Firebaseautenticacao();
+        findViewById(R.id.logout).setOnClickListener(this::logout);
 
         // Inicializar variáveis e configurar listeners para os cards
         setupCards();
     }
 
     private void setupCards() {
-        CardView consultCard = findViewById(R.id.consult_card);
+        CardView consultCard = findViewById(R.id.consulta_card);
         CardView projectsCard = findViewById(R.id.projects_card);
         CardView businessCard = findViewById(R.id.bussines_card);
         CardView eventCard = findViewById(R.id.event_card);
@@ -56,6 +57,8 @@ public class HomeActivity extends AppCompatActivity {
     public void logout(View view) {
         try {
             auth.signOut();
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+            finish(); // This line will ensure that the user cannot press the back button to return to the HomeActivity
         } catch (Exception e) {
             Toast.makeText(this, "Erro ao fazer logout. Tente novamente.", Toast.LENGTH_SHORT).show();
         }

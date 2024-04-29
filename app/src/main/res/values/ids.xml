@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nome_text_view" type="id"/>
+    <item name="descricao_text_view" type="id"/>
+    <item name="logo_image_view" type="id"/>
+</resources>

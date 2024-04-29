@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imagenslist"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
+
+
+    <ImageView
+        android:id="@+id/imageViewNV1"
+        android:layout_width="wrap_content"
+        android:layout_height="272dp"
+        android:padding="10dp"
+        android:src="@drawable/foto1" />
+
+    <ImageView
+        android:id="@+id/imageViewNV2"
+        android:layout_width="wrap_content"
+        android:layout_height="272dp"
+        android:padding="10dp"
+        android:src="@drawable/foto2" />
+
+    <ImageView
+        android:id="@+id/imageViewNV3"
+        android:layout_width="wrap_content"
+        android:layout_height="272dp"
+        android:padding="10dp"
+        android:src="@drawable/foto3" />
+
+    <ImageView
+
+        android:id="@+id/imageViewNV4"
+        android:layout_width="wrap_content"
+        android:layout_height="272dp"
+        android:padding="10dp"
+        android:src="@drawable/foto4" />
+
+    <ImageView
+        android:id="@+id/imageViewNV5"
+        android:layout_width="wrap_content"
+        android:layout_height="272dp"
+        android:padding="10dp"
+        android:src="@drawable/foto5" />
+
+
+</LinearLayout>

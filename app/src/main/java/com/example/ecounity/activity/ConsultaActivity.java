@@ -44,6 +44,7 @@ public class ConsultaActivity extends AppCompatActivity {
                             practices.add(practice);
                         }
                         practiceAdapter = new PracticeAdapter(practices);
+
                         recyclerView.setAdapter(practiceAdapter);
                     } else {
                         Log.d("ConsultaActivity", "Error getting documents: ", task.getException());
@@ -59,7 +60,12 @@ public class ConsultaActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
+                if (newText.isEmpty()) {
+                    // Reset the list to the original practices when query is empty
+                    practiceAdapter.filterList(practiceAdapter.getOriginalPractices());
+                } else {
+                    filterList(newText);
+                }
                 return true;
             }
         });
@@ -67,12 +73,16 @@ public class ConsultaActivity extends AppCompatActivity {
 
     private void filterList(String query) {
         List<Practice> filteredList = new ArrayList<>();
-        for (Practice practice : practiceAdapter.getPractices()) {
-            if (practice.getTitulo().toLowerCase().contains(query.toLowerCase())) {
+        for (Practice practice : practiceAdapter.getOriginalPractices()) {
+            if (practice.getTitulo().toLowerCase().contains(query.toLowerCase())
+                    || practice.getDescricao().toLowerCase().contains(query.toLowerCase())
+                    || practice.getCategoria().toLowerCase().contains(query.toLowerCase())) {
                 filteredList.add(practice);
             }
         }
+
         practiceAdapter.filterList(filteredList);
         practiceAdapter.notifyDataSetChanged();
     }
+
 }

@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ecounity.R;
 import com.example.ecounity.activity.model.Practice;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
-public class PracticeAdapter extends RecyclerView.Adapter<PracticeViewHolder> {
-    private List<Practice> practices;
+public class PracticeAdapter extends RecyclerView.Adapter<PracticeViewHolder>{
+        private List<Practice> originalPractices;
+    private List<Practice> filteredPractices;
 
     public PracticeAdapter(List<Practice> practices) {
-        this.practices = practices;
+        this.originalPractices = practices;
+        this.filteredPractices = new ArrayList<>(practices);
     }
 
     @NonNull
@@ -29,7 +31,7 @@ public class PracticeAdapter extends RecyclerView.Adapter<PracticeViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PracticeViewHolder holder, int position) {
-        Practice practice = practices.get(position);
+        Practice practice = filteredPractices.get(position);
         holder.titleTextView.setText(practice.getTitulo());
         holder.descriptionTextView.setText(practice.getDescricao());
         holder.categoryTextView.setText(practice.getCategoria());
@@ -37,15 +39,19 @@ public class PracticeAdapter extends RecyclerView.Adapter<PracticeViewHolder> {
 
     @Override
     public int getItemCount() {
-        return practices.size();
+        return filteredPractices.size();
     }
 
-    public List<Practice> getPractices() {
-        return practices;
+    public List<Practice> getOriginalPractices() {
+        return originalPractices;
     }
 
-    public void filterList(List<Practice> filteredList) {
-        practices = filteredList;
+    public List<Practice> getFilteredPractices() {
+        return filteredPractices;
+    }
+
+    public void filterList(List<Practice> filteredPractices) {
+        this.filteredPractices = filteredPractices;
         notifyDataSetChanged();
     }
 }

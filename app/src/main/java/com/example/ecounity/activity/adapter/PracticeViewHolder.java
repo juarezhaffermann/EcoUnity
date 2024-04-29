@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ecounity.R;
 
-// PracticeViewHolder.java
+
 public class PracticeViewHolder extends RecyclerView.ViewHolder {
     public TextView titleTextView;
     public TextView descriptionTextView;

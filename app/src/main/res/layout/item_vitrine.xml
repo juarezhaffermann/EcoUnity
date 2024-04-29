@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/colorAccent"
+    app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
+
+    <TextView
+        android:id="@+id/txtTituloVitrine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Título do Negócio Verde"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtDescricaoNegocio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:text="Descrição do Negócio"/>
+
+    <TextView
+        android:id="@+id/txtSite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="www.meusite.com"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="meusite@meusite.com"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(54) 9182-2856"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/txtProdutos"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Produtos:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/produtos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_produtos"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imagensCarrosel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/imagens_vitrine"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/txtEnderecoNegocio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Rua: Flores Astrais, 1569 - Bairro: Eucaliptos - CEP: 957508-770 - Pairaiso - TO "
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapViewNegocio"
+        android:layout_width="match_parent"
+        android:layout_height="272dp"
+        android:layout_marginTop="5dp" />
+</LinearLayout>
