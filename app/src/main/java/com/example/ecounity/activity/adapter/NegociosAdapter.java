@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewAnimator;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,16 +47,18 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
                     .into(holder.logotipoImageView);
         } else {
 
-            holder.logotipoImageView.setImageResource(R.drawable.placeholder_logotipo);  // Replace with your resource ID (optional)
+            holder.logotipoImageView.setImageResource(R.drawable.placeholder_logotipo);
         }
         holder.descricaoTextView.setText(negocio.getDescricao());
         holder.siteTextView.setText(negocio.getSite());
         holder.emailTextView.setText(negocio.getEmail());
         holder.phoneTextView.setText(negocio.getTelefone());
-        // Remover linha caso não saiba como acessar produtos no objeto Negocios
-        // holder.produtosTextView.setText(negocio.getProdutosServicos());
-        // Remova a linha caso não tenha um campo nomeproduto na sua classe Negocios
-        // holder.nome_produtoTextView.setText(negocio.getNomeproduto());
+        holder.nome_produtoTextView.setText(negocio.getProduto());
+        holder.descricao_produtoTextView.setText(negocio.getDescricao_produto());
+
+        // Convert the Double price to String
+        String precoString = Double.toString(negocio.getPreco());
+        holder.precoTextView.setText(precoString);
     }
 
     @Override
@@ -73,6 +76,9 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
         public TextView phoneTextView;
         public TextView produtosTextView;
         public TextView nome_produtoTextView;
+        public TextView descricao_produtoTextView;
+        public TextView precoTextView;
+        public ViewAnimator viewAnimator;
 
         public NegociosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,7 +91,9 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
             phoneTextView = itemView.findViewById(R.id.txtPhone);
             produtosTextView = itemView.findViewById(R.id.txtProdutos);
             nome_produtoTextView = itemView.findViewById(R.id.txtNomeProduto);
+            descricao_produtoTextView = itemView.findViewById(R.id.txtDescricaoProduto);
+            precoTextView = itemView.findViewById(R.id.txtPreco);
+            viewAnimator = itemView.findViewById(R.id.ImagensCarrosel);
         }
     }
 }
-

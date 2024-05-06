@@ -4,6 +4,7 @@ import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewAnimator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -23,6 +24,9 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
     public TextView phoneTextView;
     public TextView produtosTextView;
     public TextView nome_produtoTextView;
+    public TextView descricao_produtoTextView;
+    public TextView precoTextView;
+    public ViewAnimator viewAnimator;
 
     public NegociosViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -35,6 +39,10 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
         phoneTextView = itemView.findViewById(R.id.txtPhone);
         produtosTextView = itemView.findViewById(R.id.txtProdutos);
         nome_produtoTextView = itemView.findViewById(R.id.txtNomeProduto);
+        descricao_produtoTextView = itemView.findViewById(R.id.txtDescricaoProduto);
+        precoTextView = itemView.findViewById(R.id.txtPreco);
+        viewAnimator = itemView.findViewById(R.id.ImagensCarrosel);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -45,11 +53,21 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
                     .load(negocio.getLogotipo())
                     .into(logotipoImageView);
         }
-        descricaoTextView.setText(negocio.getDescricao());
-        siteTextView.setText(negocio.getSite());
-        emailTextView.setText(negocio.getEmail());
-        phoneTextView.setText(negocio.getTelefone());
-        produtosTextView.setText(negocio.getProdutosServicos());
-
+        if (negocio.getImagens() != null && !negocio.getImagens().isEmpty()) {
+            for (int i = 0; i < negocio.getImagens().size(); i++) {
+                ImageView imageView = (ImageView) viewAnimator.getChildAt(i);
+                Glide.with(itemView.getContext())
+                        .load(negocio.getImagens().get(i))
+                        .into(imageView);
+            }
+            descricaoTextView.setText(negocio.getDescricao());
+            siteTextView.setText(negocio.getSite());
+            emailTextView.setText(negocio.getEmail());
+            phoneTextView.setText(negocio.getTelefone());
+            nome_produtoTextView.setText(negocio.getProduto());
+            descricao_produtoTextView.setText(negocio.getDescricao_produto());
+            String precoString = Double.toString(negocio.getPreco());
+            precoTextView.setText(precoString);
+        }
     }
 }

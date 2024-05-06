@@ -37,27 +37,27 @@ public class ProjetosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projetos);
 
-        // Inicializar Firebase
+
         storageReference = FirebaseStorage.getInstance().getReference("projetos");
 
-        // Referenciar RecyclerView
+
         RecyclerView recyclerViewProjetos = findViewById(R.id.recyclerViewProjetos);
 
-        // Configurar layout manager para RecyclerView
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewProjetos.setLayoutManager(layoutManager);
 
-        // Inicializar lista de projetos
+
         listaProjetos = new ArrayList<>();
 
-        // Inicializar adapter e configurar RecyclerView
+
         projetosAdapter = new ProjetosAdapter(this, listaProjetos);
         recyclerViewProjetos.setAdapter(projetosAdapter);
 
-        // Carregar lista de projetos do Cloud Storage
+
         carregarProjetos();
 
-        // Adicionar escuta para o botão
+
         Button buttonAdicionarProjeto = findViewById(R.id.buttonAdicionarProjeto);
         buttonAdicionarProjeto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,33 +67,33 @@ public class ProjetosActivity extends AppCompatActivity {
             }
         });
 
-        // Listar projetos do banco de dados na activity_projetos.xml
+
         listarProjetosDoBancoDeDados();
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private void carregarProjetos() {
-        // Limpar lista de projetos antes de carregar novamente
+
         listaProjetos.clear();
 
-        // Obter referência do Firestore
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Consulta ao Firestore para obter os projetos
+
         db.collection("projetos")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            // Obter projeto e adicionar à lista
+
                             Projeto projeto = document.toObject(Projeto.class);
                             listaProjetos.add(projeto);
                         }
 
-                        // Notificar o adapter sobre as mudanças nos dados
+
                         projetosAdapter.notifyDataSetChanged();
                     } else {
-                        // Em caso de erro na consulta
+
                         Log.w(TAG, "Error getting documents.", task.getException());
                     }
                 });
@@ -103,7 +103,7 @@ public class ProjetosActivity extends AppCompatActivity {
 
 
     private void listarProjetosDoBancoDeDados() {
-        // Substitua este método pelo seu próprio método para buscar os projetos do banco de dados
+
     }
 
 }

@@ -1,9 +1,22 @@
 package com.example.ecounity.activity.model;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
 
 public class Negocios {
+    private String id;
+    private String nome;
+    private String descricao;
+    private String site;
+    private String email;
+    private String telefone;
+    private String logotipo;
+    private ArrayList<String> imagens;
+    private double avaliacao_media;
+    private int numero_avaliacoes;
+    private String produto;
+    private String descricao_produto;
+    private double preco;
+
     public String getId() {
         return id;
     }
@@ -68,113 +81,43 @@ public class Negocios {
         this.imagens = imagens;
     }
 
-    public double getAvaliacaoMedia() {
-        return avaliacaoMedia;
+    public double getAvaliacao_media() {
+        return avaliacao_media;
     }
 
-    public void setAvaliacaoMedia(double avaliacaoMedia) {
-        this.avaliacaoMedia = avaliacaoMedia;
+    public void setAvaliacao_media(double avaliacao_media) {
+        this.avaliacao_media = avaliacao_media;
     }
 
-    public int getNumeroDeAvaliacoes() {
-        return numeroDeAvaliacoes;
+    public int getNumero_avaliacoes() {
+        return numero_avaliacoes;
     }
 
-    public void setNumeroDeAvaliacoes(int numeroDeAvaliacoes) {
-        this.numeroDeAvaliacoes = numeroDeAvaliacoes;
+    public void setNumero_avaliacoes(int numero_avaliacoes) {
+        this.numero_avaliacoes = numero_avaliacoes;
     }
 
-    public CharSequence getProdutosServicos() {
-        return (CharSequence) produtosServicos;
+    public String getProduto() {
+        return produto;
     }
 
-    public void setProdutosServicos(ArrayList<Object> produtosServicos) {
-        this.produtosServicos = produtosServicos;
+    public void setProduto(String produto) {
+        this.produto = produto;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getDescricao_produto() {
+        return descricao_produto;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setDescricao_produto(String descricao_produto) {
+        this.descricao_produto = descricao_produto;
     }
 
-    public Object getLocalizacao() {
-        return localizacao;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setLocalizacao(Object localizacao) {
-        this.localizacao = localizacao;
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
-
-    public Timestamp getCriadoEm() {
-        return criadoEm;
-    }
-
-    public void setCriadoEm(Timestamp criadoEm) {
-        this.criadoEm = criadoEm;
-    }
-
-    public Timestamp getAtualizadoEm() {
-        return atualizadoEm;
-    }
-
-    public void setAtualizadoEm(Timestamp atualizadoEm) {
-        this.atualizadoEm = atualizadoEm;
-    }
-
-    public String getNomeproduto() {
-        return nomeproduto;
-    }
-
-    public void setNomeproduto(String nomeproduto) {
-        this.nomeproduto = nomeproduto;
-    }
-
-    public String getDescricaoProduto() {
-        return descricaoProduto;
-    }
-
-    public void setDescricaoProduto(String descricaoProduto) {
-        this.descricaoProduto = descricaoProduto;
-    }
-
-    public String getPrecoProduto() {
-        return precoProduto;
-    }
-
-    public void setPrecoProduto(String precoProduto) {
-        this.precoProduto = precoProduto;
-    }
-
-    public String getValorProduto() {
-        return valorProduto;
-    }
-
-    public void setValorProduto(String valorProduto) {
-        this.valorProduto = valorProduto;
-    }
-
-    private String id;
-    private String nome;
-    private String descricao;
-    private String site;
-    private String email;
-    private String telefone;
-    private String logotipo;
-    private ArrayList<String> imagens;
-    private double avaliacaoMedia;
-    private int numeroDeAvaliacoes;
-    private ArrayList<Object> produtosServicos;
-    private String categoria;
-    private Object localizacao;
-    private Timestamp criadoEm;
-    private Timestamp atualizadoEm;
-    private String nomeproduto;
-    private String descricaoProduto;
-    private String precoProduto;
-    private String valorProduto;
-
-
 }
