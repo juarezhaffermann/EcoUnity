@@ -42,7 +42,7 @@ public class VitrineActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        // Configurar o RecyclerView
+
         recyclerViewNegocios.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NegociosAdapter();
         recyclerViewNegocios.setAdapter(adapter);
@@ -60,7 +60,7 @@ public class VitrineActivity extends AppCompatActivity {
                         adapter.setListaNegocios(listaNegocios);
                     } else {
                         Log.e(TAG, "Error getting documents: ", Objects.requireNonNull(task.getException()));
-                        // Handle the exception here, e.g., show an error message to the user
+
                         Toast.makeText(VitrineActivity.this, "Erro ao carregar dados. Por favor, tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
                     }
                 });

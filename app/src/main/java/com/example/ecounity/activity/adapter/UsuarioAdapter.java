@@ -38,8 +38,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
 
         // Carregar foto do perfil (se disponível)
         if (usuario.getFotoPerfilUrl() != null && !usuario.getFotoPerfilUrl().isEmpty()) {
-            // Aqui você pode usar uma biblioteca como Glide ou Picasso para carregar a imagem
-            // Exemplo com Glide:
+
             Glide.with(holder.itemView.getContext())
                     .load(usuario.getFotoPerfilUrl())
                     .into(holder.fotoPerfilImageView);
@@ -60,14 +59,14 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
     // Não esqueça de adicionar as referências para fotoPerfilImageView e statusConexaoTextView no seu ViewHolder:
     static class UsuarioViewHolder extends RecyclerView.ViewHolder {
         TextView nomeTextView;
-        ImageView fotoPerfilImageView; // Adicione esta linha
-        TextView statusConexaoTextView; // Adicione esta linha
+        ImageView fotoPerfilImageView;
+        TextView statusConexaoTextView;
 
         public UsuarioViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeTextView = itemView.findViewById(R.id.user_name);
-            fotoPerfilImageView = itemView.findViewById(R.id.user_profile_image); // Adicione esta linha
-            statusConexaoTextView = itemView.findViewById(R.id.user_status_connection); // Adicione esta linha
+            fotoPerfilImageView = itemView.findViewById(R.id.user_profile_image);
+            statusConexaoTextView = itemView.findViewById(R.id.user_status_connection);
         }
     }
 

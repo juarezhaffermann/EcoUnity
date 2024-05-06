@@ -25,7 +25,7 @@
             android:fontFamily="@font/roboto_bold"
             android:paddingStart="25dp"
             android:paddingEnd="135dp"
-            android:text="Painel de Administração"
+            android:text="Painel Administrativo"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -61,8 +61,8 @@
                     android:layout_height="64dp"
                     android:background="@drawable/circle_backgroud_limegreen"
                     android:padding="10dp"
-                    android:src="@drawable/consulta_desktop"
-                    app:srcCompat="@drawable/baseline_person_24" />
+                    android:src="@drawable/baseline_person_add_24"
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="Configuração de Eventos"
+                    android:text="Meus Eventos"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
             </LinearLayout>

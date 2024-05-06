@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.ecounity.R;
 import com.example.ecounity.activity.model.Negocios;
 
@@ -17,62 +18,74 @@ import java.util.List;
 
 public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.NegociosViewHolder> {
 
-    private List<Negocios> negociosList;
+    private List<Negocios> listaNegocios;
 
-    // Construtor que recebe a lista de negócios
     public NegociosAdapter() {
-        this.negociosList = new ArrayList<>();
+        this.listaNegocios = new ArrayList<>();
     }
 
-    public void setListaNegocios(List<Negocios> novaLista) {
-        this.negociosList = novaLista;
-        notifyDataSetChanged();  // Notificar o RecyclerView que os dados foram alterados
+    public void setListaNegocios(List<Negocios> listaNegocios) {
+        this.listaNegocios = listaNegocios;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public NegociosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vitrine, parent, false);
-        return new NegociosViewHolder(view);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vitrine, parent, false);
+        return new NegociosViewHolder(itemView);
     }
 
-    // Este método vincula os dados do objeto Negocios à ViewHolder
     @Override
     public void onBindViewHolder(@NonNull NegociosViewHolder holder, int position) {
-        Negocios negocio = negociosList.get(position);
+        Negocios negocio = listaNegocios.get(position);
         holder.nomeTextView.setText(negocio.getNome());
-        holder.descricaoTextView.setText(negocio.getDescricao());
-        // Aqui você pode usar uma biblioteca como Glide ou Picasso para carregar e definir a imagem do logotipo
+        if (negocio.getLogotipo() != null && !negocio.getLogotipo().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(negocio.getLogotipo())
+                    .into(holder.logotipoImageView);
+        } else {
 
-        // Aqui você pode definir um listener de clique para o item, se necessário
+            holder.logotipoImageView.setImageResource(R.drawable.placeholder_logotipo);  // Replace with your resource ID (optional)
+        }
+        holder.descricaoTextView.setText(negocio.getDescricao());
+        holder.siteTextView.setText(negocio.getSite());
+        holder.emailTextView.setText(negocio.getEmail());
+        holder.phoneTextView.setText(negocio.getTelefone());
+        // Remover linha caso não saiba como acessar produtos no objeto Negocios
+        // holder.produtosTextView.setText(negocio.getProdutosServicos());
+        // Remova a linha caso não tenha um campo nomeproduto na sua classe Negocios
+        // holder.nome_produtoTextView.setText(negocio.getNomeproduto());
     }
 
-    // Este método retorna o número total de itens na lista
     @Override
     public int getItemCount() {
-        return negociosList.size();
+        return listaNegocios.size();
     }
 
-    // Este método atualiza os dados da lista e notifica o adapter sobre as alterações
-    public void atualizarDados(List<Negocios> novaLista) {
-        negociosList.clear();
-        negociosList.addAll(novaLista);
-        notifyDataSetChanged();
-    }
-
-    // ViewHolder para armazenar as views do layout item_vitrine
     public static class NegociosViewHolder extends RecyclerView.ViewHolder {
 
         public TextView nomeTextView;
+        public ImageView logotipoImageView;
         public TextView descricaoTextView;
-        public ImageView logoImageView;
+        public TextView siteTextView;
+        public TextView emailTextView;
+        public TextView phoneTextView;
+        public TextView produtosTextView;
+        public TextView nome_produtoTextView;
 
         public NegociosViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nomeTextView = itemView.findViewById(R.id.txtTituloVitrine);
+            logotipoImageView = itemView.findViewById(R.id.imageViewLogotipo);
             descricaoTextView = itemView.findViewById(R.id.txtDescricaoNegocio);
-            logoImageView = itemView.findViewById(R.id.imageView2);
+            siteTextView = itemView.findViewById(R.id.txtSite);
+            emailTextView = itemView.findViewById(R.id.txtEmail);
+            phoneTextView = itemView.findViewById(R.id.txtPhone);
+            produtosTextView = itemView.findViewById(R.id.txtProdutos);
+            nome_produtoTextView = itemView.findViewById(R.id.txtNomeProduto);
         }
     }
 }
+

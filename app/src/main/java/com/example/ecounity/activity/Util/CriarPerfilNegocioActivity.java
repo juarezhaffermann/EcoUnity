@@ -33,7 +33,7 @@ import java.util.UUID;
 public class CriarPerfilNegocioActivity extends AppCompatActivity {
     private static final String TAG = "CriarPerfilNegocioActivity";
     private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText nomeNegocio, descricaoNegocio, siteNegocio, emailNegocio, telefoneNegocio, enderecoNegocio;
+    private EditText nomeNegocio, descricaoNegocio, siteNegocio, emailNegocio, telefoneNegocio, enderecoNegocio, produto, descricaoProduto,precoProduto;
     private ImageView fotoPerfil;
     private List<String> imagensUrls = new ArrayList<>();
     private List<Uri> imagensUris = new ArrayList<>();
@@ -53,6 +53,9 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
         emailNegocio = findViewById(R.id.editTextTextEmailAddress2);
         telefoneNegocio = findViewById(R.id.editTextPhone);
         enderecoNegocio = ((TextInputLayout) findViewById(R.id.enderecoNegocioVerde)).getEditText();
+        produto = ((TextInputLayout) findViewById(R.id.produto)).getEditText();
+        descricaoProduto = ((TextInputLayout) findViewById(R.id.descricaoProduto)).getEditText();
+        precoProduto = ((TextInputLayout) findViewById(R.id.precoProduto)).getEditText();
         fotoPerfil = findViewById(R.id.fotoPerfilNegocio);
 
         ImageView imageView1 = findViewById(R.id.imageView1);
@@ -130,6 +133,9 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
             String email = emailNegocio.getText().toString();
             String telefone = telefoneNegocio.getText().toString();
             String endereco = enderecoNegocio.getText().toString();
+            String produtoValor = produto.getText().toString();
+            String descricaoProdutoValor = descricaoProduto.getText().toString();
+            String precoProdutoValor = precoProduto.getText().toString();
 
             if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(descricao) || TextUtils.isEmpty(endereco)) {
                 Toast.makeText(this, "Preencha todos os campos obrigatórios", Toast.LENGTH_SHORT).show();
@@ -147,6 +153,9 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
             dadosPerfil.put("imagens", imagensUrls);
             dadosPerfil.put("avaliacao_media", 0.0);
             dadosPerfil.put("numero_avaliacoes", 0);
+            dadosPerfil.put("produto", produtoValor);
+            dadosPerfil.put("descricao_produto", descricaoProdutoValor);
+            dadosPerfil.put("preco", Double.parseDouble(precoProdutoValor));
 
             db.collection("empresas_verdes")
                     .add(dadosPerfil)

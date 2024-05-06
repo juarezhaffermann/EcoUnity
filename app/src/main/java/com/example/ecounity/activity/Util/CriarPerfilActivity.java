@@ -25,11 +25,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 
 public class CriarPerfilActivity extends AppCompatActivity {
 
@@ -38,6 +38,12 @@ public class CriarPerfilActivity extends AppCompatActivity {
 
     private ImageView fotoPerfilImageView;
     private EditText nomeEditText;
+
+    private EditText dataEditText;
+    private EditText sexoEditText;
+    private EditText cidadeEditText;
+    private EditText estadoEditText;
+    private EditText bioEditText;
     private Button salvarButton;
 
     private Uri fotoPerfilUri;
@@ -55,6 +61,11 @@ public class CriarPerfilActivity extends AppCompatActivity {
         fotoPerfilImageView = findViewById(R.id.fotoPerfilImageView);
         nomeEditText = findViewById(R.id.nomeEditText);
         salvarButton = findViewById(R.id.salvarButton);
+        dataEditText = findViewById(R.id.editTextDate);
+        sexoEditText = findViewById(R.id.sexo);
+        cidadeEditText = findViewById(R.id.cidade);
+        estadoEditText = findViewById(R.id.estado);
+        bioEditText = findViewById(R.id.bio);
 
         db = FirebaseFirestore.getInstance();
         storageRef = FirebaseStorage.getInstance().getReference();
@@ -132,12 +143,22 @@ public class CriarPerfilActivity extends AppCompatActivity {
         String uid = auth.getCurrentUser().getUid();
         String email = auth.getCurrentUser().getEmail();
         String nome = nomeEditText.getText().toString();
+        String data = dataEditText.getText().toString();
+        String sexo = sexoEditText.getText().toString();
+        String cidade = cidadeEditText.getText().toString();
+        String estado = estadoEditText.getText().toString();
+        String bio = bioEditText.getText().toString();
 
         Map<String, Object> dadosUsuario = new HashMap<>();
         dadosUsuario.put("fotoPerfil", fotoPerfilUrl);
         dadosUsuario.put("nome", nome);
+        dadosUsuario.put("data", data);
+        dadosUsuario.put("sexo", sexo);
+        dadosUsuario.put("cidade", cidade);
+        dadosUsuario.put("estado", estado);
+        dadosUsuario.put("bio", bio);
         dadosUsuario.put("email", email);
-        dadosUsuario.put("statusConexao", false); // Exemplo de status de conexão (offline)
+        dadosUsuario.put("statusConexao", false);
         dadosUsuario.put("uid", uid);
 
         CollectionReference usuariosCollection = db.collection("Usuarios");

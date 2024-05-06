@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import com.example.ecounity.R;
 import com.example.ecounity.activity.Util.ConfiguracaoBD;
 import com.example.ecounity.activity.Util.CriarPerfilActivity;
+import com.example.ecounity.activity.Util.CriarPerfilNegocioActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PainelActivity extends AppCompatActivity {
@@ -31,10 +32,16 @@ public class PainelActivity extends AppCompatActivity {
 
     private void setupCards() {
         CardView consultCard = findViewById(R.id.cad_perfil_card);
+        CardView myProjects = findViewById(R.id.my_projects_card);
+        CardView cadNegocio = findViewById(R.id.my_bussines_card);
+        CardView myEvents = findViewById(R.id.edit_event_card);
 
 
 
         setCardListener(consultCard, CriarPerfilActivity.class);
+        setCardListener(myProjects,ProjetosActivity.class);
+        setCardListener(cadNegocio, CriarPerfilNegocioActivity.class);
+        setCardListener(myEvents, EventosActivity.class);
 
 
     }

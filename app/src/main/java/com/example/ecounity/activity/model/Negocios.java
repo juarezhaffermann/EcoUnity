@@ -84,8 +84,8 @@ public class Negocios {
         this.numeroDeAvaliacoes = numeroDeAvaliacoes;
     }
 
-    public ArrayList<Object> getProdutosServicos() {
-        return produtosServicos;
+    public CharSequence getProdutosServicos() {
+        return (CharSequence) produtosServicos;
     }
 
     public void setProdutosServicos(ArrayList<Object> produtosServicos) {
@@ -124,6 +124,38 @@ public class Negocios {
         this.atualizadoEm = atualizadoEm;
     }
 
+    public String getNomeproduto() {
+        return nomeproduto;
+    }
+
+    public void setNomeproduto(String nomeproduto) {
+        this.nomeproduto = nomeproduto;
+    }
+
+    public String getDescricaoProduto() {
+        return descricaoProduto;
+    }
+
+    public void setDescricaoProduto(String descricaoProduto) {
+        this.descricaoProduto = descricaoProduto;
+    }
+
+    public String getPrecoProduto() {
+        return precoProduto;
+    }
+
+    public void setPrecoProduto(String precoProduto) {
+        this.precoProduto = precoProduto;
+    }
+
+    public String getValorProduto() {
+        return valorProduto;
+    }
+
+    public void setValorProduto(String valorProduto) {
+        this.valorProduto = valorProduto;
+    }
+
     private String id;
     private String nome;
     private String descricao;
@@ -139,6 +171,10 @@ public class Negocios {
     private Object localizacao;
     private Timestamp criadoEm;
     private Timestamp atualizadoEm;
+    private String nomeproduto;
+    private String descricaoProduto;
+    private String precoProduto;
+    private String valorProduto;
 
 
 }
