@@ -7,16 +7,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecounity.R;
 import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +44,13 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private Uri imagemUri;
+    private Uri logotipoUri;
+
+    // Criação do launcher para a seleção de imagem
+    private final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            this::handleActivityResult
+    );
 
     @SuppressLint("LongLogTag")
     @Override
@@ -58,21 +69,22 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
         precoProduto = ((TextInputLayout) findViewById(R.id.precoProduto)).getEditText();
         fotoPerfil = findViewById(R.id.fotoPerfilNegocio);
 
+        View.OnClickListener imageClickListener = v -> mGetContent.launch(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT));
+
         ImageView imageView1 = findViewById(R.id.imageView1);
-        imageView1.setOnClickListener(v -> selecionarImagem());
+        imageView1.setOnClickListener(imageClickListener);
 
         ImageView imageView2 = findViewById(R.id.imageView2);
-        imageView2.setOnClickListener(v -> selecionarImagem());
+        imageView2.setOnClickListener(imageClickListener);
 
         ImageView imageView3 = findViewById(R.id.imageView3);
-        imageView3.setOnClickListener(v -> selecionarImagem());
+        imageView3.setOnClickListener(imageClickListener);
 
         ImageView imageView4 = findViewById(R.id.imageView4);
-        imageView4.setOnClickListener(v -> selecionarImagem());
+        imageView4.setOnClickListener(imageClickListener);
 
         ImageView imageView5 = findViewById(R.id.imageView5);
-        imageView5.setOnClickListener(v -> selecionarImagem());
-
+        imageView5.setOnClickListener(imageClickListener);
 
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -82,7 +94,7 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+                mGetContent.launch(intent);  // Atualizado para usar a nova API
             } catch (Exception e) {
                 Log.e(TAG, "Erro ao selecionar imagem", e);
                 Toast.makeText(this, "Erro ao selecionar imagem", Toast.LENGTH_SHORT).show();
@@ -91,7 +103,7 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
 
         findViewById(R.id.salvarButton).setOnClickListener(v -> {
             try {
-                salvarPerfil();
+                uploadLogoAndSaveProfile();
             } catch (Exception e) {
                 Log.e(TAG, "Erro ao salvar perfil", e);
                 Toast.makeText(this, "Erro ao salvar perfil", Toast.LENGTH_SHORT).show();
@@ -99,98 +111,115 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
-            imagemUri = data.getData();
-            fotoPerfil.setImageURI(imagemUri);
-        }
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
-            if (data.getClipData() != null) {
+    private void handleActivityResult(ActivityResult result) {
+        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+            Intent data = result.getData();
+            if (data.getData() != null) {
+                logotipoUri = data.getData();
+                fotoPerfil.setImageURI(logotipoUri);
+            } else if (data.getClipData() != null) {
                 ClipData mClipData = data.getClipData();
                 for (int i = 0; i < mClipData.getItemCount(); i++) {
                     ClipData.Item item = mClipData.getItemAt(i);
                     Uri uri = item.getUri();
                     imagensUris.add(uri);
                 }
-            } else if (data.getData() != null) {
-                Uri uri = data.getData();
-                imagensUris.add(uri);
             }
         }
     }
 
-    @SuppressLint("LongLogTag")
-    private void salvarPerfil() {
-        try {
-            String nome = nomeNegocio.getText().toString();
-            String descricao = descricaoNegocio.getText().toString();
-            String site = siteNegocio.getText().toString();
-            String email = emailNegocio.getText().toString();
-            String telefone = telefoneNegocio.getText().toString();
-            String endereco = enderecoNegocio.getText().toString();
-            String produtoValor = produto.getText().toString();
-            String descricaoProdutoValor = descricaoProduto.getText().toString();
-            String precoProdutoValor = precoProduto.getText().toString();
+    private void uploadLogoAndSaveProfile() {
+        String nome = nomeNegocio.getText().toString();
+        String descricao = descricaoNegocio.getText().toString();
+        String site = siteNegocio.getText().toString();
+        String email = emailNegocio.getText().toString();
+        String telefone = telefoneNegocio.getText().toString();
+        String endereco = enderecoNegocio.getText().toString();
+        String produtoValor = produto.getText().toString();
+        String descricaoProdutoValor = descricaoProduto.getText().toString();
+        String precoProdutoValor = precoProduto.getText().toString();
 
-            if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(descricao) || TextUtils.isEmpty(endereco)) {
-                Toast.makeText(this, "Preencha todos os campos obrigatórios", Toast.LENGTH_SHORT).show();
-                return;
+        if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(descricao) || TextUtils.isEmpty(endereco)) {
+            Toast.makeText(this, "Preencha todos os campos obrigatórios", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Map<String, Object> dadosPerfil = new HashMap<>();
+        dadosPerfil.put("nome", nome);
+        dadosPerfil.put("descricao", descricao);
+        dadosPerfil.put("site", site);
+        dadosPerfil.put("email", email);
+        dadosPerfil.put("telefone", telefone);
+        dadosPerfil.put("endereco", endereco);
+        dadosPerfil.put("logotipo", "");
+        dadosPerfil.put("imagens", imagensUrls);
+        dadosPerfil.put("avaliacao_media", 0.0);
+        dadosPerfil.put("numero_avaliacoes", 0);
+        dadosPerfil.put("produto", produtoValor);
+        dadosPerfil.put("descricao_produto", descricaoProdutoValor);
+        dadosPerfil.put("preco", Double.parseDouble(precoProdutoValor));
+
+        String fileName = UUID.randomUUID().toString();
+        final StorageReference ref = storage.getReference().child("logos/" + fileName);
+        UploadTask uploadTask = ref.putFile(logotipoUri);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return ref.getDownloadUrl();
             }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    dadosPerfil.put("logotipo", downloadUri.toString());
+                    salvarPerfil(dadosPerfil);
+                } else {
+                    Log.e(TAG, "Erro ao fazer upload do logotipo", task.getException());
+                    Toast.makeText(CriarPerfilNegocioActivity.this, "Erro ao fazer upload do logotipo", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
-            Map<String, Object> dadosPerfil = new HashMap<>();
-            dadosPerfil.put("nome", nome);
-            dadosPerfil.put("descricao", descricao);
-            dadosPerfil.put("site", site);
-            dadosPerfil.put("email", email);
-            dadosPerfil.put("telefone", telefone);
-            dadosPerfil.put("endereco", endereco);
-            dadosPerfil.put("logotipo", "");
-            dadosPerfil.put("imagens", imagensUrls);
-            dadosPerfil.put("avaliacao_media", 0.0);
-            dadosPerfil.put("numero_avaliacoes", 0);
-            dadosPerfil.put("produto", produtoValor);
-            dadosPerfil.put("descricao_produto", descricaoProdutoValor);
-            dadosPerfil.put("preco", Double.parseDouble(precoProdutoValor));
+    @SuppressLint("LongLogTag")
+    private void salvarPerfil(Map<String, Object> dadosPerfil) {
+        db.collection("empresas_verdes")
+                .add(dadosPerfil)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        String documentId = task.getResult().getId();
+                        Log.d(TAG, "Perfil salvo com sucesso: " + documentId);
 
-            db.collection("empresas_verdes")
-                    .add(dadosPerfil)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            String documentId = task.getResult().getId();
-                            Log.d(TAG, "Perfil salvo com sucesso: " + documentId);
+                        // Chame salvarImagemLogo() aqui
+                        salvarImagemLogo(documentId);
 
-                            if (imagensUrls.size() > 0) {
-                                salvarImagemLogo(documentId);
-                            }
-
+                        if (imagensUrls.size() > 0) {
                             for (Uri uri : imagensUris) {
                                 salvarImagemNegocio(documentId, uri);
                             }
-
-                            finish();
-                        } else {
-                            Log.w(TAG, "Erro ao salvar perfil", task.getException());
-                            Toast.makeText(CriarPerfilNegocioActivity.this, "Erro ao salvar perfil", Toast.LENGTH_SHORT).show();
                         }
-                    });
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao salvar dados do perfil", e);
-            Toast.makeText(this, "Erro ao salvar dados do perfil", Toast.LENGTH_SHORT).show();
-        }
+
+                        finish();
+                    } else {
+                        Log.w(TAG, "Erro ao salvar perfil", task.getException());
+                        Toast.makeText(CriarPerfilNegocioActivity.this, "Erro ao salvar perfil", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @SuppressLint("LongLogTag")
     private void salvarImagemLogo(String documentId) {
         try {
-            if (imagemUri != null) {
+            if (logotipoUri != null) {
                 final StorageReference fileReference = storage.getReference().child("logotipos/" + documentId);
 
-                fileReference.putFile(imagemUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                fileReference.putFile(logotipoUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                         if (!task.isSuccessful()) {
@@ -217,18 +246,6 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
     }
 
     @SuppressLint("LongLogTag")
-    private void selecionarImagem() {
-        try {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao selecionar imagem", e);
-            Toast.makeText(this, "Erro ao selecionar imagem", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void salvarImagemNegocio(String documentId, Uri imagemUri) {
         if (imagemUri != null) {
             final StorageReference fileReference = storage.getReference().child("imagens_negocio/" + documentId + "/" + UUID.randomUUID().toString());
@@ -249,8 +266,9 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
                     db.collection("empresas_verdes").document(documentId)
                             .update("imagens", imagensUrls);
                 } else {
-                    // Handle failures
-                    // ...
+                    Exception e = task.getException();
+                    Log.e(TAG, "Erro ao salvar imagem", e);
+                    Toast.makeText(this, "Erro ao salvar imagem", Toast.LENGTH_SHORT).show();
                 }
             });
         }

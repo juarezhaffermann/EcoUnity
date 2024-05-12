@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,6 +8,16 @@
     android:padding="16dp"
     android:background="@color/colorAccent"
     app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:padding="16dp"
+    android:background="@color/colorAccent">
 
     <TextView
         android:id="@+id/txtTituloVitrine"
@@ -160,45 +170,11 @@
 
  <ViewAnimator
     android:id="@+id/ImagensCarrosel"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content">
-     <ImageView
-         android:id="@+id/imageViewNV1"
-         android:layout_width="wrap_content"
-         android:layout_height="272dp"
-         android:padding="10dp"
-         android:src="@drawable/foto1" />
+     android:layout_width="match_parent"
+     android:layout_height="200dp">
 
-     <ImageView
-         android:id="@+id/imageViewNV2"
-         android:layout_width="wrap_content"
-         android:layout_height="272dp"
-         android:padding="10dp"
-         android:src="@drawable/foto2" />
-
-     <ImageView
-         android:id="@+id/imageViewNV3"
-         android:layout_width="wrap_content"
-         android:layout_height="272dp"
-         android:padding="10dp"
-         android:src="@drawable/foto3" />
-
-     <ImageView
-
-         android:id="@+id/imageViewNV4"
-         android:layout_width="wrap_content"
-         android:layout_height="272dp"
-         android:padding="10dp"
-         android:src="@drawable/foto4" />
-
-     <ImageView
-         android:id="@+id/imageViewNV5"
-         android:layout_width="wrap_content"
-         android:layout_height="272dp"
-         android:padding="10dp"
-         android:src="@drawable/foto5" />
  </ViewAnimator>
 
-
-
 </LinearLayout>
+
+</androidx.cardview.widget.CardView>

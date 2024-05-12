@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         setCardListener(consultCard, ConsultaActivity.class);
         setCardListener(projectsCard, ProjetosActivity.class);
         setCardListener(businessCard, VitrineActivity.class);
-        setCardListener(eventCard, EventosActivity.class);
+        setCardListener(eventCard, ListaEventosActivity.class);
         setCardListener(networkingCard, NetworkingActivity.class);
         setCardListener(adminCard, PainelActivity.class);
     }

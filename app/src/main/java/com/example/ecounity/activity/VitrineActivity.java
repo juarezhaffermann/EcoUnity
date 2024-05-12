@@ -56,8 +56,10 @@ public class VitrineActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Negocios negocio = document.toObject(Negocios.class);
                             listaNegocios.add(negocio);
+
                         }
                         adapter.setListaNegocios(listaNegocios);
+                        adapter.notifyDataSetChanged();
                     } else {
                         Log.e(TAG, "Error getting documents: ", Objects.requireNonNull(task.getException()));
 

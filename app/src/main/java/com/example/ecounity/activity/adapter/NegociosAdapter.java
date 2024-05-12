@@ -41,20 +41,30 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
     public void onBindViewHolder(@NonNull NegociosViewHolder holder, int position) {
         Negocios negocio = listaNegocios.get(position);
         holder.nomeTextView.setText(negocio.getNome());
-        if (negocio.getLogotipo() != null && !negocio.getLogotipo().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(negocio.getLogotipo())
-                    .into(holder.logotipoImageView);
-        } else {
 
-            holder.logotipoImageView.setImageResource(R.drawable.placeholder_logotipo);
+        // Carregar a imagem do logotipo usando Glide
+        Glide.with(holder.itemView.getContext())
+                .load(negocio.getLogotipo())
+                .into(holder.logotipoImageView);
+
+        if (negocio.getImagens() != null && !negocio.getImagens().isEmpty()) {
+            holder.viewAnimator.removeAllViews(); // Limpa todas as views existentes
+            for (String imageUrl : negocio.getImagens()) {
+                ImageView imageView = new ImageView(holder.itemView.getContext());
+                Glide.with(holder.itemView.getContext())
+                        .load(imageUrl)
+                        .into(imageView);
+                holder.viewAnimator.addView(imageView); // Adiciona a nova ImageView ao ViewAnimator
+            }
         }
+
         holder.descricaoTextView.setText(negocio.getDescricao());
         holder.siteTextView.setText(negocio.getSite());
         holder.emailTextView.setText(negocio.getEmail());
         holder.phoneTextView.setText(negocio.getTelefone());
         holder.nome_produtoTextView.setText(negocio.getProduto());
         holder.descricao_produtoTextView.setText(negocio.getDescricao_produto());
+
 
         // Convert the Double price to String
         String precoString = Double.toString(negocio.getPreco());

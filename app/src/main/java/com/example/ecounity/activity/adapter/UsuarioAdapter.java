@@ -1,5 +1,6 @@
 package com.example.ecounity.activity.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,13 @@ import java.util.List;
 public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioViewHolder> {
 
     private List<Usuario> usuarios;
+    private OnSendButtonClickListener onSendButtonClickListener;
+    private Context context;
 
-    public UsuarioAdapter(List<Usuario> usuarios) {
+    public UsuarioAdapter(List<Usuario> usuarios, OnSendButtonClickListener onSendButtonClickListener, Context context) {
         this.usuarios = usuarios;
+        this.onSendButtonClickListener = onSendButtonClickListener;
+        this.context = context;
     }
 
     @NonNull
@@ -36,17 +41,27 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
     public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) {
         Usuario usuario = usuarios.get(position);
 
-        // Carregar foto do perfil (se disponível)
-        if (usuario.getFotoPerfilUrl() != null && !usuario.getFotoPerfilUrl().isEmpty()) {
-
-            Glide.with(holder.itemView.getContext())
-                    .load(usuario.getFotoPerfilUrl())
+        String fotoPerfilUrl = usuario.getFotoPerfilUrl();
+        if (fotoPerfilUrl != null && !fotoPerfilUrl.isEmpty()) {
+            Glide.with(context)
+                    .load(fotoPerfilUrl)
+                    .placeholder(R.drawable.placeholder)
                     .into(holder.fotoPerfilImageView);
+        } else {
+            holder.fotoPerfilImageView.setImageResource(R.drawable.person_chat);
         }
 
-        holder.nomeTextView.setText(usuario.getNome());
 
-        // Indicar status de conexão (online/offline)
+        holder.nomeTextView.setText(usuario.getNome());
+        holder.bioTextView.setText(usuario.getBio());
+        holder.dataTextView.setText(usuario.getData());
+        holder.emailTextView.setText(usuario.getEmail());
+        holder.sexoTextView.setText(usuario.getSexo());
+        holder.estadoTextView.setText(usuario.getEstado());
+        holder.cidadeTextView.setText(usuario.getCidade());
+
+
+
         if (usuario.isOnline()) {
             holder.statusConexaoTextView.setText("Online");
             holder.statusConexaoTextView.setTextColor(Color.GREEN);
@@ -54,20 +69,45 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
             holder.statusConexaoTextView.setText("Offline");
             holder.statusConexaoTextView.setTextColor(Color.RED);
         }
+
+        holder.sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber = usuario.getWhatsapp();
+                onSendButtonClickListener.onSendButtonClick(phoneNumber);
+            }
+        });
     }
 
     // Não esqueça de adicionar as referências para fotoPerfilImageView e statusConexaoTextView no seu ViewHolder:
     static class UsuarioViewHolder extends RecyclerView.ViewHolder {
+        public View sendButton;
         TextView nomeTextView;
         ImageView fotoPerfilImageView;
+        TextView bioTextView;
+        TextView dataTextView;
+        TextView cidadeTextView;
+        TextView estadoTextView;
+        TextView sexoTextView;
+        TextView emailTextView;
         TextView statusConexaoTextView;
 
         public UsuarioViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeTextView = itemView.findViewById(R.id.user_name);
             fotoPerfilImageView = itemView.findViewById(R.id.user_profile_image);
+            bioTextView = itemView.findViewById(R.id.txtBio);
+            dataTextView = itemView.findViewById(R.id.txtData);
+            cidadeTextView = itemView.findViewById(R.id.txtCidade);
+            estadoTextView = itemView.findViewById(R.id.txtEstado);
+            sexoTextView = itemView.findViewById(R.id.txtSexo);
+            emailTextView = itemView.findViewById(R.id.txtEmailPerfil);
             statusConexaoTextView = itemView.findViewById(R.id.user_status_connection);
+            sendButton = itemView.findViewById(R.id.send_button);
         }
+    }
+    public interface OnSendButtonClickListener {
+        void onSendButtonClick(String phoneNumber);
     }
 
     @Override

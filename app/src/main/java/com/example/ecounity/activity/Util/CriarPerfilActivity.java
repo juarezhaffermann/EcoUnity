@@ -45,6 +45,7 @@ public class CriarPerfilActivity extends AppCompatActivity {
     private EditText estadoEditText;
     private EditText bioEditText;
     private Button salvarButton;
+    private EditText whatsappEditText;
 
     private Uri fotoPerfilUri;
     private String fotoPerfilUrl;
@@ -66,6 +67,9 @@ public class CriarPerfilActivity extends AppCompatActivity {
         cidadeEditText = findViewById(R.id.cidade);
         estadoEditText = findViewById(R.id.estado);
         bioEditText = findViewById(R.id.bio);
+        whatsappEditText = findViewById(R.id.editTextWhatsAppNumber);
+
+
 
         db = FirebaseFirestore.getInstance();
         storageRef = FirebaseStorage.getInstance().getReference();
@@ -148,6 +152,7 @@ public class CriarPerfilActivity extends AppCompatActivity {
         String cidade = cidadeEditText.getText().toString();
         String estado = estadoEditText.getText().toString();
         String bio = bioEditText.getText().toString();
+        String whatsapp = whatsappEditText.getText().toString().trim();
 
         Map<String, Object> dadosUsuario = new HashMap<>();
         dadosUsuario.put("fotoPerfil", fotoPerfilUrl);
@@ -160,6 +165,7 @@ public class CriarPerfilActivity extends AppCompatActivity {
         dadosUsuario.put("email", email);
         dadosUsuario.put("statusConexao", false);
         dadosUsuario.put("uid", uid);
+        dadosUsuario.put("whatsapp", whatsapp);
 
         CollectionReference usuariosCollection = db.collection("Usuarios");
 

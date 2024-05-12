@@ -1,34 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/colorAccent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+    <LinearLayout
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/user_profile_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/person_chat"
-        />
-
-
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Usuário Teste"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:orientation="horizontal"
+        android:background="@color/colorAccent"
+        android:layout_gravity="center"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/user_status_connection"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/person_chat"
+            android:layout_gravity="center"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/indentify_area"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Status Conexão"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:orientation="horizontal"
+        android:background="@color/colorAccent"
+        android:layout_gravity="center"
+        android:gravity="center">>
+
+          <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+              android:layout_gravity="center"
+            android:text="Usuário Teste"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+
+
 </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txtSexo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masculino"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/txtData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="02/06/1984"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/txtEmailPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="juarezhaffermann@msn.com"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/txtCidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="São Borja"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/txtEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rio Grande do Sul"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+
+
+        <TextView
+            android:id="@+id/user_status_connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status Conexão"
+            android:textColor="@color/white"
+             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+
+     >
+
+        <TextView
+            android:id="@+id/txtBio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apaixonada pela sinfonia da floresta e pelo encanto das estrelas.
+
+Exploradora: Aventuras nas trilhas, escalando montanhas e desvendando cachoeiras. Me sinto em casa no meio do verde. ⛰️️
+
+Fotógrafa da natureza: Capturando a beleza do mundo natural em cada clique. Meus registros são poesia visual.
+
+Defensora do meio ambiente: Acredito no poder da ação individual para criar um futuro mais verde. ♻️
+
+Sempre aprendendo: A natureza é minha professora, me ensinando sobre a vida, a resiliência e a beleza em cada detalhe.
+
+Em busca de paz interior: Encontro na natureza o meu refúgio, onde me conecto comigo mesma e com o universo. ‍♀️
+
+#natureza #meioambiente #exploracao #fotografia #sustentabilidade #pazinterior"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="15dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/chat_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+
+        <EditText
+            android:id="@+id/message_input"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:hint="@string/message_hint"
+            android:imeOptions="actionSend"
+             />
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/send_button_text"
+            />
+
+    </LinearLayout>
+</LinearLayout>
+</androidx.cardview.widget.CardView>

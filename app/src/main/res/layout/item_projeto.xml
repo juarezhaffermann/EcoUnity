@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Título do Projeto"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"/>
 
@@ -21,7 +21,7 @@
         android:id="@+id/txtDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:text="Descrição do Projeto"/>
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:text="Metas do projeto:"/>
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:text="Metas do Projeto"/>
 

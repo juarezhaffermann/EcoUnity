@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.ecounity.R;
+import com.example.ecounity.activity.Util.CadastrarEventoActivity;
 import com.example.ecounity.activity.Util.ConfiguracaoBD;
 import com.example.ecounity.activity.Util.CriarPerfilActivity;
 import com.example.ecounity.activity.Util.CriarPerfilNegocioActivity;
@@ -41,7 +42,7 @@ public class PainelActivity extends AppCompatActivity {
         setCardListener(consultCard, CriarPerfilActivity.class);
         setCardListener(myProjects,ProjetosActivity.class);
         setCardListener(cadNegocio, CriarPerfilNegocioActivity.class);
-        setCardListener(myEvents, EventosActivity.class);
+        setCardListener(myEvents, CadastrarEventoActivity.class);
 
 
     }
