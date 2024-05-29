@@ -1,16 +1,15 @@
 package com.example.ecounity.activity.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.ecounity.R;
 import com.example.ecounity.activity.model.Evento;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +37,17 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
         holder.data.setText(evento.getData());
         holder.horario.setText(evento.getHorario());
         holder.local.setText(evento.getLocal());
+
+        // Adiciona o clique no item para abrir o Google Maps
+        holder.itemView.setOnClickListener(v -> {
+            String address = evento.getLocal();
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(address));
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(mapIntent);
+            }
+        });
     }
 
     @Override
@@ -80,3 +90,4 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
         }
     }
 }
+
