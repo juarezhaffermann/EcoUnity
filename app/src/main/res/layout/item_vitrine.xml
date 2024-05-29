@@ -168,12 +168,42 @@
          android:textStyle="bold" />
  </LinearLayout>
 
- <ViewAnimator
-    android:id="@+id/ImagensCarrosel"
-     android:layout_width="match_parent"
-     android:layout_height="200dp">
+    <ViewAnimator
+        android:id="@+id/ImagensCarrosel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
 
- </ViewAnimator>
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"  android:src="@drawable/foto1" />
+        <ImageView
+        android:id="@+id/image2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"  android:src="@drawable/foto2" />
+
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"  android:src="@drawable/foto3" />
+
+        <ImageView
+            android:id="@+id/image4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"  android:src="@drawable/foto3" />
+
+        <ImageView
+            android:id="@+id/image5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"  android:src="@drawable/foto3" />
+
+    </ViewAnimator>
+
 
 </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.example.ecounity.activity.adapter;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.List;
 public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.NegociosViewHolder> {
 
     private List<Negocios> listaNegocios;
+    private static final int ANIMATION_DURATION = 3000; // 3 segundos
 
     public NegociosAdapter() {
         this.listaNegocios = new ArrayList<>();
@@ -47,6 +49,7 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
                 .load(negocio.getLogotipo())
                 .into(holder.logotipoImageView);
 
+        // Configurar o ViewAnimator com as imagens dos produtos
         if (negocio.getImagens() != null && !negocio.getImagens().isEmpty()) {
             holder.viewAnimator.removeAllViews(); // Limpa todas as views existentes
             for (String imageUrl : negocio.getImagens()) {
@@ -56,6 +59,8 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
                         .into(imageView);
                 holder.viewAnimator.addView(imageView); // Adiciona a nova ImageView ao ViewAnimator
             }
+            // Iniciar a animação de transição de imagens
+            startImageAnimation(holder.viewAnimator);
         }
 
         holder.descricaoTextView.setText(negocio.getDescricao());
@@ -64,7 +69,6 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
         holder.phoneTextView.setText(negocio.getTelefone());
         holder.nome_produtoTextView.setText(negocio.getProduto());
         holder.descricao_produtoTextView.setText(negocio.getDescricao_produto());
-
 
         // Convert the Double price to String
         String precoString = Double.toString(negocio.getPreco());
@@ -76,6 +80,21 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
         return listaNegocios.size();
     }
 
+    private void startImageAnimation(ViewAnimator viewAnimator) {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                int displayedChild = viewAnimator.getDisplayedChild();
+                int childCount = viewAnimator.getChildCount();
+                int nextChild = (displayedChild + 1) % childCount;
+                viewAnimator.setDisplayedChild(nextChild);
+                handler.postDelayed(this, ANIMATION_DURATION);
+            }
+        };
+        handler.post(runnable);
+    }
+
     public static class NegociosViewHolder extends RecyclerView.ViewHolder {
 
         public TextView nomeTextView;
@@ -84,7 +103,6 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
         public TextView siteTextView;
         public TextView emailTextView;
         public TextView phoneTextView;
-        public TextView produtosTextView;
         public TextView nome_produtoTextView;
         public TextView descricao_produtoTextView;
         public TextView precoTextView;
@@ -99,7 +117,6 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
             siteTextView = itemView.findViewById(R.id.txtSite);
             emailTextView = itemView.findViewById(R.id.txtEmail);
             phoneTextView = itemView.findViewById(R.id.txtPhone);
-            produtosTextView = itemView.findViewById(R.id.txtProdutos);
             nome_produtoTextView = itemView.findViewById(R.id.txtNomeProduto);
             descricao_produtoTextView = itemView.findViewById(R.id.txtDescricaoProduto);
             precoTextView = itemView.findViewById(R.id.txtPreco);
