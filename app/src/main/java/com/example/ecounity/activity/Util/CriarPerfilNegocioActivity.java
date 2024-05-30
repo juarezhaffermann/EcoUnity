@@ -36,17 +36,15 @@ import java.util.UUID;
 
 public class CriarPerfilNegocioActivity extends AppCompatActivity {
     private static final String TAG = "CriarPerfilNegocioActivity";
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText nomeNegocio, descricaoNegocio, siteNegocio, emailNegocio, telefoneNegocio, enderecoNegocio, produto, descricaoProduto,precoProduto;
+    private EditText nomeNegocio, descricaoNegocio, siteNegocio, emailNegocio, telefoneNegocio, enderecoNegocio, produto, descricaoProduto, precoProduto;
     private ImageView fotoPerfil;
     private List<String> imagensUrls = new ArrayList<>();
     private List<Uri> imagensUris = new ArrayList<>();
     private FirebaseFirestore db;
     private FirebaseStorage storage;
-    private Uri imagemUri;
     private Uri logotipoUri;
+    private boolean isLogotipo = false;
 
-    // Criação do launcher para a seleção de imagem
     private final ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             this::handleActivityResult
@@ -61,15 +59,18 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
         nomeNegocio = ((TextInputLayout) findViewById(R.id.nomeNegocioVerde)).getEditText();
         descricaoNegocio = ((TextInputLayout) findViewById(R.id.descricaoNegocioVerde)).getEditText();
         siteNegocio = ((TextInputLayout) findViewById(R.id.siteNegocioVerde)).getEditText();
-        emailNegocio = findViewById(R.id.editTextTextEmailAddress2);
-        telefoneNegocio = findViewById(R.id.editTextPhone);
+        emailNegocio = ((TextInputLayout) findViewById(R.id.editTextTextEmailAddress2)).getEditText();
+        telefoneNegocio = ((TextInputLayout) findViewById(R.id.editTextPhone)).getEditText();
         enderecoNegocio = ((TextInputLayout) findViewById(R.id.enderecoNegocioVerde)).getEditText();
         produto = ((TextInputLayout) findViewById(R.id.produto)).getEditText();
         descricaoProduto = ((TextInputLayout) findViewById(R.id.descricaoProduto)).getEditText();
         precoProduto = ((TextInputLayout) findViewById(R.id.precoProduto)).getEditText();
         fotoPerfil = findViewById(R.id.fotoPerfilNegocio);
 
-        View.OnClickListener imageClickListener = v -> mGetContent.launch(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT));
+        View.OnClickListener imageClickListener = v -> {
+            isLogotipo = false; // Indicate that this is not for the logotipo
+            mGetContent.launch(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT).putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true));
+        };
 
         ImageView imageView1 = findViewById(R.id.imageView1);
         imageView1.setOnClickListener(imageClickListener);
@@ -91,10 +92,11 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
 
         fotoPerfil.setOnClickListener(v -> {
             try {
+                isLogotipo = true; // Indicate that this is for the logotipo
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                mGetContent.launch(intent);  // Atualizado para usar a nova API
+                mGetContent.launch(intent);
             } catch (Exception e) {
                 Log.e(TAG, "Erro ao selecionar imagem", e);
                 Toast.makeText(this, "Erro ao selecionar imagem", Toast.LENGTH_SHORT).show();
@@ -114,14 +116,19 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
     private void handleActivityResult(ActivityResult result) {
         if (result.getResultCode() == RESULT_OK && result.getData() != null) {
             Intent data = result.getData();
-            if (data.getData() != null) {
+            if (isLogotipo) {
                 logotipoUri = data.getData();
                 fotoPerfil.setImageURI(logotipoUri);
-            } else if (data.getClipData() != null) {
-                ClipData mClipData = data.getClipData();
-                for (int i = 0; i < mClipData.getItemCount(); i++) {
-                    ClipData.Item item = mClipData.getItemAt(i);
-                    Uri uri = item.getUri();
+            } else {
+                if (data.getClipData() != null) {
+                    ClipData mClipData = data.getClipData();
+                    for (int i = 0; i < mClipData.getItemCount(); i++) {
+                        ClipData.Item item = mClipData.getItemAt(i);
+                        Uri uri = item.getUri();
+                        imagensUris.add(uri);
+                    }
+                } else if (data.getData() != null) {
+                    Uri uri = data.getData();
                     imagensUris.add(uri);
                 }
             }
@@ -159,32 +166,36 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
         dadosPerfil.put("descricao_produto", descricaoProdutoValor);
         dadosPerfil.put("preco", Double.parseDouble(precoProdutoValor));
 
-        String fileName = UUID.randomUUID().toString();
-        final StorageReference ref = storage.getReference().child("logos/" + fileName);
-        UploadTask uploadTask = ref.putFile(logotipoUri);
+        if (logotipoUri != null) {
+            String fileName = UUID.randomUUID().toString();
+            final StorageReference ref = storage.getReference().child("logos/" + fileName);
+            UploadTask uploadTask = ref.putFile(logotipoUri);
 
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return ref.getDownloadUrl();
                 }
-                return ref.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @SuppressLint("LongLogTag")
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                    dadosPerfil.put("logotipo", downloadUri.toString());
-                    salvarPerfil(dadosPerfil);
-                } else {
-                    Log.e(TAG, "Erro ao fazer upload do logotipo", task.getException());
-                    Toast.makeText(CriarPerfilNegocioActivity.this, "Erro ao fazer upload do logotipo", Toast.LENGTH_SHORT).show();
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @SuppressLint("LongLogTag")
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        dadosPerfil.put("logotipo", downloadUri.toString());
+                        salvarPerfil(dadosPerfil);
+                    } else {
+                        Log.e(TAG, "Erro ao fazer upload do logotipo", task.getException());
+                        Toast.makeText(CriarPerfilNegocioActivity.this, "Erro ao fazer upload do logotipo", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            salvarPerfil(dadosPerfil);
+        }
     }
 
     @SuppressLint("LongLogTag")
@@ -196,13 +207,8 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
                         String documentId = task.getResult().getId();
                         Log.d(TAG, "Perfil salvo com sucesso: " + documentId);
 
-                        // Chame salvarImagemLogo() aqui
-                        salvarImagemLogo(documentId);
-
-                        if (imagensUrls.size() > 0) {
-                            for (Uri uri : imagensUris) {
-                                salvarImagemNegocio(documentId, uri);
-                            }
+                        for (Uri uri : imagensUris) {
+                            salvarImagemNegocio(documentId, uri);
                         }
 
                         finish();
@@ -214,63 +220,28 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
     }
 
     @SuppressLint("LongLogTag")
-    private void salvarImagemLogo(String documentId) {
-        try {
-            if (logotipoUri != null) {
-                final StorageReference fileReference = storage.getReference().child("logotipos/" + documentId);
+    private void salvarImagemNegocio(String documentId, Uri uri) {
+        String fileName = UUID.randomUUID().toString();
+        final StorageReference ref = storage.getReference().child("imagens/" + fileName);
+        UploadTask uploadTask = ref.putFile(uri);
 
-                fileReference.putFile(logotipoUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
-
-                        return fileReference.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-                        db.collection("empresas_verdes").document(documentId)
-                                .update("logotipo", downloadUri.toString());
-                    } else {
-                        // Handle failures
-                        // ...
-                    }
-                });
+        Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw task.getException();
             }
-        } catch (Exception e) {
-            Log.e(TAG, "Erro ao salvar imagem do logotipo", e);
-            Toast.makeText(this, "Erro ao salvar imagem do logotipo", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @SuppressLint("LongLogTag")
-    private void salvarImagemNegocio(String documentId, Uri imagemUri) {
-        if (imagemUri != null) {
-            final StorageReference fileReference = storage.getReference().child("imagens_negocio/" + documentId + "/" + UUID.randomUUID().toString());
-
-            fileReference.putFile(imagemUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-
-                    return fileReference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                    imagensUrls.add(downloadUri.toString());
-                    db.collection("empresas_verdes").document(documentId)
-                            .update("imagens", imagensUrls);
-                } else {
-                    Exception e = task.getException();
-                    Log.e(TAG, "Erro ao salvar imagem", e);
-                    Toast.makeText(this, "Erro ao salvar imagem", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            return ref.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Uri downloadUri = task.getResult();
+                imagensUrls.add(downloadUri.toString());
+                db.collection("empresas_verdes").document(documentId)
+                        .update("imagens", imagensUrls)
+                        .addOnSuccessListener(aVoid -> Log.d(TAG, "Imagem adicionada com sucesso ao perfil"))
+                        .addOnFailureListener(e -> Log.w(TAG, "Erro ao adicionar imagem ao perfil", e));
+            } else {
+                Log.e(TAG, "Erro ao fazer upload da imagem", task.getException());
+                Toast.makeText(CriarPerfilNegocioActivity.this, "Erro ao fazer upload da imagem", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
