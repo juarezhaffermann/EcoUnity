@@ -8,33 +8,53 @@
     android:padding="16dp"
     tools:context=".activity.CriarProjetoActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastro de Projeto"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
     <EditText
         android:id="@+id/editTextTitulo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_texto"
         android:hint="Título do Projeto"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/editTextDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_texto"
+        android:ems="3"
         android:hint="Descrição do Projeto"
         android:inputType="textMultiLine"
-        android:minLines="3" />
+        android:minLines="10"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/editTextMetas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_texto"
         android:hint="Metas do Projeto"
         android:inputType="textMultiLine"
-        android:minLines="3" />
+        android:minLines="10"
+        android:textColorHint="@color/white" />
 
     <Button
         android:id="@+id/buttonCriarProjeto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="Criar Projeto" />
 
 

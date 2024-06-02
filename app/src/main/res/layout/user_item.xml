@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/colorAccent">
+    android:padding="20dp"
+    android:background="@color/verdedark">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorAccent"
+        android:background="@color/verdedark"
         android:layout_gravity="center"
         android:gravity="center">
 
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorAccent"
+        android:background="@color/verdemusgo"
         android:layout_gravity="center"
         android:gravity="center">>
 
@@ -61,7 +61,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/verdemusgo"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center">
@@ -94,7 +94,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/verdemusgo"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center">
@@ -113,7 +113,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/verdemusgo"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
@@ -148,7 +148,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/verdemusgo"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center">
@@ -168,35 +168,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_gravity="center"
+        android:background="@color/verdeclaro"
+        android:padding="10dp"
 
-     >
+    >
 
         <TextView
             android:id="@+id/txtBio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Apaixonada pela sinfonia da floresta e pelo encanto das estrelas.
-
-Exploradora: Aventuras nas trilhas, escalando montanhas e desvendando cachoeiras. Me sinto em casa no meio do verde. ⛰️️
-
-Fotógrafa da natureza: Capturando a beleza do mundo natural em cada clique. Meus registros são poesia visual.
-
-Defensora do meio ambiente: Acredito no poder da ação individual para criar um futuro mais verde. ♻️
-
-Sempre aprendendo: A natureza é minha professora, me ensinando sobre a vida, a resiliência e a beleza em cada detalhe.
-
-Em busca de paz interior: Encontro na natureza o meu refúgio, onde me conecto comigo mesma e com o universo. ‍♀️
-
-#natureza #meioambiente #exploracao #fotografia #sustentabilidade #pazinterior"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:text="@string/bio"
             android:textColor="@color/white"
-            android:layout_marginBottom="15dp"
+
+
             />
 
     </LinearLayout>
@@ -209,14 +195,17 @@ Em busca de paz interior: Encontro na natureza o meu refúgio, onde me conecto c
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_gravity="center"
+        android:background="@color/verdeescuro"
         android:gravity="center"
         >
 
         <EditText
             android:id="@+id/message_input"
-            android:layout_width="200dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:hint="@string/message_hint"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:imeOptions="actionSend"
              />
 

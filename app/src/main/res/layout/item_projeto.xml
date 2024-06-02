@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="5dp"
+    app:cardBackgroundColor="@color/verdemusgo"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/colorAccent"
-    app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
+    android:background="@color/verdemusgo"
+    >
 
     <TextView
         android:id="@+id/txtTitulo"
@@ -30,7 +40,7 @@
         android:id="@+id/txtTituloMetas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -40,9 +50,10 @@
         android:id="@+id/txtMetas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"
         android:textColor="@color/white"
         android:text="Metas do Projeto"/>
 
 </LinearLayout>
+</androidx.cardview.widget.CardView>

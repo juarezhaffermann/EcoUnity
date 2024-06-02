@@ -3,6 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorAccent">#4CAF50</color>
+    <color name="verdemusgo">#588157</color>
+    <color name="verdeescuro">#3a5a40</color>
+    <color name="verdedark">#344e41</color>
+    <color name="verdeoliva">#a3b18a</color>
+    <color name="verdeclaro">#a3b18a</color>
 
 
 </resources>

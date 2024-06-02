@@ -13,35 +13,74 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastro de Evento"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp"></TextView>
+
         <EditText
             android:id="@+id/et_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome do evento" />
+            android:hint="Nome do evento"
+            android:textColorHint="@color/white"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/background_texto"/>
 
         <EditText
             android:id="@+id/et_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Data do evento" />
+            android:hint="Data do evento"
+            android:textColorHint="@color/white"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/background_texto"
+            />
 
         <EditText
             android:id="@+id/et_horario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Horário do evento" />
+            android:hint="Horário do evento"
+            android:textColorHint="@color/white"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/background_texto"/>
 
         <EditText
             android:id="@+id/et_local"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Local do evento" />
+            android:hint="Local do evento"
+            android:textColorHint="@color/white"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/background_texto"/>
 
         <Button
             android:id="@+id/btn_cadastrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cadastrar evento" />
+            android:text="Cadastrar evento"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

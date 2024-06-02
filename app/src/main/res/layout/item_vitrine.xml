@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/colorAccent"
+    android:background="@color/verdemusgo"
     app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
 <LinearLayout
     android:layout_width="match_parent"
@@ -17,7 +17,7 @@
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
     android:padding="16dp"
-    android:background="@color/colorAccent">
+    android:background="@color/verdemusgo">
 
     <TextView
         android:id="@+id/txtTituloVitrine"
@@ -26,13 +26,14 @@
         android:text="Título do Negócio Verde"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageViewLogotipo"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginTop="16dp"
         app:srcCompat="@drawable/placeholder"
 
         />
@@ -41,10 +42,10 @@
         android:id="@+id/txtDescricaoNegocio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="32dp"
+        android:text="Descrição do Negócio"
         android:textColor="@color/white"
-        android:text="Descrição do Negócio"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txtSite"
@@ -54,7 +55,7 @@
         android:text="www.meusite.com"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtEmail"
@@ -64,7 +65,7 @@
         android:text="meusite@meusite.com"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtPhone"
@@ -74,7 +75,7 @@
         android:text="(54) 9182-2856"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtEnderecoNegocio"
@@ -84,14 +85,14 @@
         android:text="Rua: Flores Astrais, 1569 - Bairro: Eucaliptos - CEP: 957508-770 - Pairaiso - TO "
         android:textAlignment="viewStart"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtProdutos"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Produtos:"
+        android:text="Produto:"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -104,7 +105,7 @@
         android:text="Morangos"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtDescricaoProduto"
@@ -117,31 +118,18 @@
          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:textAlignment="viewStart"
         android:justificationMode="inter_word"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
  <LinearLayout
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      >
 
-     <TextView
-         android:id="@+id/txtPreçoTitulo"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="5dp"
-         android:layout_marginBottom="10dp"
-         android:layout_marginEnd="10dp"
-         android:text="Preço:"
-         android:layout_marginStart="16dp"
-         android:textAlignment="viewStart"
-         android:textColor="@color/white"
-         android:textSize="16sp"
-         android:textStyle="bold" />
+
 
      <TextView
          android:id="@+id/txtCifra"
@@ -152,8 +140,10 @@
                   android:text="R$"
          android:textAlignment="viewStart"
          android:textColor="@color/white"
-         android:textSize="16sp"
+         android:textSize="30sp"
          android:textStyle="bold" />
+
+
 
      <TextView
          android:id="@+id/txtPreco"
@@ -161,10 +151,10 @@
          android:layout_height="wrap_content"
          android:layout_marginTop="5dp"
          android:layout_marginBottom="10dp"
-         android:text="16.20"
+         android:text="18,22"
          android:textAlignment="viewStart"
          android:textColor="@color/white"
-         android:textSize="16sp"
+         android:textSize="30sp"
          android:textStyle="bold" />
  </LinearLayout>
 

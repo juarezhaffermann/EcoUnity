@@ -6,17 +6,15 @@
     android:layout_margin="10dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="5dp"
-    app:cardBackgroundColor="@color/colorAccent"
+    app:cardBackgroundColor="@color/verdemusgo"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="6dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:padding="16dp"
         android:orientation="vertical"
-        android:background="@color/colorAccent">
+        android:background="@color/verdemusgo">
 
         <TextView
             android:id="@+id/tv_nome"
@@ -33,7 +31,10 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="10/10/2012"
-            android:textColor="@color/white"/>
+            android:drawableLeft="@drawable/calendar"
+            android:drawablePadding="5dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/tv_horario"
@@ -41,6 +42,9 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="15:00"
+            android:drawableLeft="@drawable/clock"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"/>
 
         <TextView
@@ -48,6 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/local"
+            android:drawablePadding="5dp"
             android:text="Praça dos macaquinhos - Esteio - RS"
             android:textColor="@color/white"/>
 
