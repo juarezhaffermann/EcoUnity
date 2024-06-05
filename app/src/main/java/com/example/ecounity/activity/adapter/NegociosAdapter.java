@@ -75,8 +75,11 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
         holder.nome_produtoTextView.setText(negocio.getProduto());
         holder.descricao_produtoTextView.setText(negocio.getDescricao_produto());
 
-        // Convert the Double price to String
-        String precoString = Double.toString(negocio.getPreco());
+        // Formatar o preço para exibir vírgula ao invés de ponto e remover zeros desnecessários
+        String precoString = String.format("%.2f", negocio.getPreco()).replace(".", ",");
+        if (precoString.endsWith(",00")) {
+            precoString = precoString.substring(0, precoString.length() - 3);
+        }
         holder.precoTextView.setText(precoString);
 
         // Adiciona o clique no item para abrir o Google Maps
