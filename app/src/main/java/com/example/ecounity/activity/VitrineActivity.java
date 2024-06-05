@@ -44,7 +44,7 @@ public class VitrineActivity extends AppCompatActivity {
 
 
         recyclerViewNegocios.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NegociosAdapter();
+        NegociosAdapter adapter = new NegociosAdapter(this);
         recyclerViewNegocios.setAdapter(adapter);
 
         // Carregar dados do Firestore

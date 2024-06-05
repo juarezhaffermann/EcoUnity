@@ -1,5 +1,8 @@
 package com.example.ecounity.activity.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +24,12 @@ import java.util.List;
 public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.NegociosViewHolder> {
 
     private List<Negocios> listaNegocios;
+    private Context context;
     private static final int ANIMATION_DURATION = 3000; // 3 segundos
 
-    public NegociosAdapter() {
+    public NegociosAdapter(Context context) {
         this.listaNegocios = new ArrayList<>();
+        this.context = context;
     }
 
     public void setListaNegocios(List<Negocios> listaNegocios) {
@@ -73,6 +78,17 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
         // Convert the Double price to String
         String precoString = Double.toString(negocio.getPreco());
         holder.precoTextView.setText(precoString);
+
+        // Adiciona o clique no item para abrir o Google Maps
+        holder.itemView.setOnClickListener(v -> {
+            String address = negocio.getEndereco(); // Certifique-se que você tem um método getEndereco() na classe Negocios
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(address));
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(mapIntent);
+            }
+        });
     }
 
     @Override
