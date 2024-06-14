@@ -14,7 +14,7 @@ public class Projeto implements Serializable  {
     private String nome;
     private ByteArrayOutputStream byteArrayOutputStream;
 
-    @SuppressWarnings("unused")
+
     public Projeto() {
 
     }
@@ -38,7 +38,7 @@ public class Projeto implements Serializable  {
 
 
 
-    // Getters e setters
+
     public String getId() {
         return id;
     }

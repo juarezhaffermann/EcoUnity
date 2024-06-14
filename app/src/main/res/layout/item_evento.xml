@@ -57,6 +57,15 @@
             android:drawablePadding="5dp"
             android:text="Praça dos macaquinhos - Esteio - RS"
             android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/addGoogleAgenda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adicionar a Agenda"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:clickable="true"></Button>
 
     </LinearLayout>
 

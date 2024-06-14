@@ -6,10 +6,15 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.ecounity.R;
 import com.example.ecounity.activity.model.Evento;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +53,28 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
                 context.startActivity(mapIntent);
             }
         });
+
+        // Adiciona o clique no botão para adicionar ao Google Agenda
+        holder.addGoogleAgendaButton.setOnClickListener(v -> {
+            long beginTime = evento.getBeginTimeInMillis();
+            long endTime = evento.getEndTimeInMillis();
+
+            if (beginTime != -1 && endTime != -1) {
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setData(Uri.parse("content://com.android.calendar/events"));
+                intent.putExtra("beginTime", beginTime);
+                intent.putExtra("endTime", endTime);
+                intent.putExtra("title", evento.getNome());
+                intent.putExtra("description", "Descrição do evento");
+                intent.putExtra("eventLocation", evento.getLocal());
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                }
+            } else {
+                // Tratar erro de conversão de data/hora
+                Toast.makeText(context, "Erro ao converter data/horário do evento", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -80,6 +107,7 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
         public TextView data;
         public TextView horario;
         public TextView local;
+        public Button addGoogleAgendaButton;
 
         public EventoViewHolder(View itemView) {
             super(itemView);
@@ -87,6 +115,7 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
             data = itemView.findViewById(R.id.tv_data);
             horario = itemView.findViewById(R.id.tv_horario);
             local = itemView.findViewById(R.id.tv_local);
+            addGoogleAgendaButton = itemView.findViewById(R.id.addGoogleAgenda);
         }
     }
 }

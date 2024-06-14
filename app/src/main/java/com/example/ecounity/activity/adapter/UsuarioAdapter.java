@@ -41,16 +41,12 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
     public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) {
         Usuario usuario = usuarios.get(position);
 
-        String fotoPerfilUrl = usuario.getFotoPerfilUrl();
-        if (fotoPerfilUrl != null && !fotoPerfilUrl.isEmpty()) {
-            Glide.with(context)
-                    .load(fotoPerfilUrl)
-                    .placeholder(R.drawable.placeholder)
-                    .into(holder.fotoPerfilImageView);
-        } else {
-            holder.fotoPerfilImageView.setImageResource(R.drawable.person_chat);
-        }
-
+        // Carregar a imagem de usuário usando Glide
+        Glide.with(holder.itemView.getContext())
+                .load(usuario.getFotoPerfil())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.nao_ha_fotos)
+                .into(holder.fotoPerfilImageView);
 
         holder.nomeTextView.setText(usuario.getNome());
         holder.bioTextView.setText(usuario.getBio());
@@ -59,8 +55,6 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
         holder.sexoTextView.setText(usuario.getSexo());
         holder.estadoTextView.setText(usuario.getEstado());
         holder.cidadeTextView.setText(usuario.getCidade());
-
-
 
         if (usuario.isOnline()) {
             holder.statusConexaoTextView.setText("Online");
@@ -79,7 +73,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
         });
     }
 
-    // Não esqueça de adicionar as referências para fotoPerfilImageView e statusConexaoTextView no seu ViewHolder:
+
     static class UsuarioViewHolder extends RecyclerView.ViewHolder {
         public View sendButton;
         TextView nomeTextView;
@@ -106,6 +100,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
             sendButton = itemView.findViewById(R.id.send_button);
         }
     }
+
     public interface OnSendButtonClickListener {
         void onSendButtonClick(String phoneNumber);
     }

@@ -1,200 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:background="@color/verdemusgo"
-    app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:clickable="true"
     android:orientation="vertical"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
     android:padding="16dp"
-    android:background="@color/verdemusgo">
+    app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow">
 
-    <TextView
-        android:id="@+id/txtTituloVitrine"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Título do Negócio Verde"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/imageViewLogotipo"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="16dp"
-        app:srcCompat="@drawable/placeholder"
-
-        />
-
-    <TextView
-        android:id="@+id/txtDescricaoNegocio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Descrição do Negócio"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtSite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:text="www.meusite.com"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/verdemusgo"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/txtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="meusite@meusite.com"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/txtTituloVitrine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Título do Negócio Verde"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="(54) 9182-2856"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imageViewLogotipo"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/placeholder"
 
-    <TextView
-        android:id="@+id/txtEnderecoNegocio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Rua: Flores Astrais, 1569 - Bairro: Eucaliptos - CEP: 957508-770 - Pairaiso - TO "
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+            />
 
-    <TextView
-        android:id="@+id/txtProdutos"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Produto:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtDescricaoNegocio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Descrição do Negócio"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txtNomeProduto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Morangos"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/txtSite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="www.meusite.com"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/txtDescricaoProduto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="meusite@meusite.com"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="(54) 9182-2856"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtEnderecoNegocio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Rua: Flores Astrais, 1569 - Bairro: Eucaliptos - CEP: 957508-770 - Pairaiso - TO "
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtProdutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Produto:"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtNomeProduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Morangos"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtDescricaoProduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:justificationMode="inter_word"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        android:layout_marginEnd="16dp"
-        android:textAlignment="viewStart"
-        android:justificationMode="inter_word"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     >
-
-
-
-     <TextView
-         android:id="@+id/txtCifra"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="5dp"
-         android:layout_marginEnd="5dp"
-                  android:text="R$"
-         android:textAlignment="viewStart"
-         android:textColor="@color/white"
-         android:textSize="30sp"
-         android:textStyle="bold" />
-
-
-
-     <TextView
-         android:id="@+id/txtPreco"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="5dp"
-         android:layout_marginBottom="10dp"
-         android:text="18,22"
-         android:textAlignment="viewStart"
-         android:textColor="@color/white"
-         android:textSize="30sp"
-         android:textStyle="bold" />
- </LinearLayout>
-
-    <ViewAnimator
-        android:id="@+id/ImagensCarrosel"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-        <ImageView
-            android:id="@+id/image1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"  android:src="@drawable/foto1" />
-        <ImageView
-        android:id="@+id/image2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"  android:src="@drawable/foto2" />
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/image3"
+
+            <TextView
+                android:id="@+id/txtCifra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="R$"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/txtPreco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="18,22"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ViewAnimator
+            android:id="@+id/ImagensCarrosel"
             android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/foto1" />
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/foto2" />
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/foto3" />
+
+            <ImageView
+                android:id="@+id/image4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/foto3" />
+
+            <ImageView
+                android:id="@+id/image5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/foto3" />
+
+        </ViewAnimator>
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"  android:src="@drawable/foto3" />
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/btnsite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Site"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"></Button>
+            <Button
+                android:id="@+id/btnemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enviar e-mail"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"></Button>
+            <Button
+                android:id="@+id/btnligar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ligar"
+                android:clickable="true"></Button>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/image4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"  android:src="@drawable/foto3" />
-
-        <ImageView
-            android:id="@+id/image5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"  android:src="@drawable/foto3" />
-
-    </ViewAnimator>
+    </LinearLayout>
 
 
-</LinearLayout>
 
 </androidx.cardview.widget.CardView>

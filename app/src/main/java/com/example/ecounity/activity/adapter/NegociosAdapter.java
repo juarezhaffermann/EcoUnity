@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
@@ -92,6 +93,37 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
                 context.startActivity(mapIntent);
             }
         });
+
+        // Ação do botão Site
+        holder.siteButton.setOnClickListener(v -> {
+            String url = negocio.getSite();
+            if (url != null && !url.isEmpty()) {
+                // Verifique se o URL começa com "http://" ou "https://"
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "http://" + url;
+                }
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                context.startActivity(intent); // Chamada direta do método startActivity
+            }
+        });
+
+        // Ação do botão Enviar e-mail
+        holder.emailButton.setOnClickListener(v -> {
+            String email = negocio.getEmail();
+            if (email != null && !email.isEmpty()) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", email, null));
+                context.startActivity(Intent.createChooser(intent, "Enviar e-mail..."));
+            }
+        });
+
+        // Ação do botão Ligar
+        holder.ligarButton.setOnClickListener(v -> {
+            String phone = negocio.getTelefone();
+            if (phone != null && !phone.isEmpty()) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -122,10 +154,14 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
         public TextView siteTextView;
         public TextView emailTextView;
         public TextView phoneTextView;
+        public TextView enderecoTextView;
         public TextView nome_produtoTextView;
         public TextView descricao_produtoTextView;
         public TextView precoTextView;
         public ViewAnimator viewAnimator;
+        public Button siteButton;
+        public Button emailButton;
+        public Button ligarButton;
 
         public NegociosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -136,10 +172,14 @@ public class NegociosAdapter extends RecyclerView.Adapter<NegociosAdapter.Negoci
             siteTextView = itemView.findViewById(R.id.txtSite);
             emailTextView = itemView.findViewById(R.id.txtEmail);
             phoneTextView = itemView.findViewById(R.id.txtPhone);
+            enderecoTextView=itemView.findViewById(R.id.txtEnderecoNegocio);
             nome_produtoTextView = itemView.findViewById(R.id.txtNomeProduto);
             descricao_produtoTextView = itemView.findViewById(R.id.txtDescricaoProduto);
             precoTextView = itemView.findViewById(R.id.txtPreco);
             viewAnimator = itemView.findViewById(R.id.ImagensCarrosel);
+            siteButton = itemView.findViewById(R.id.btnsite);
+            emailButton = itemView.findViewById(R.id.btnemail);
+            ligarButton = itemView.findViewById(R.id.btnligar);
         }
     }
 }

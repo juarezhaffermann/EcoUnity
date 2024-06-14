@@ -41,26 +41,27 @@
             android:id="@+id/et_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Data do evento"
+            android:hint="Data do evento (dd/MM/yyyy)"
             android:textColorHint="@color/white"
             android:textSize="20sp"
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:background="@drawable/background_texto"
-            />
+            android:inputType="date"/>
 
         <EditText
             android:id="@+id/et_horario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Horário do evento"
+            android:hint="Horário do evento (HH:mm)"
             android:textColorHint="@color/white"
             android:textSize="20sp"
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:background="@drawable/background_texto"/>
+            android:background="@drawable/background_texto"
+            android:inputType="time"/>
 
         <EditText
             android:id="@+id/et_local"

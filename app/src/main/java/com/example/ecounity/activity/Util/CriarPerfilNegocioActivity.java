@@ -68,7 +68,7 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
         fotoPerfil = findViewById(R.id.fotoPerfilNegocio);
 
         View.OnClickListener imageClickListener = v -> {
-            isLogotipo = false; // Indicate that this is not for the logotipo
+            isLogotipo = false;
             mGetContent.launch(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT).putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true));
         };
 
@@ -92,7 +92,7 @@ public class CriarPerfilNegocioActivity extends AppCompatActivity {
 
         fotoPerfil.setOnClickListener(v -> {
             try {
-                isLogotipo = true; // Indicate that this is for the logotipo
+                isLogotipo = true;
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);

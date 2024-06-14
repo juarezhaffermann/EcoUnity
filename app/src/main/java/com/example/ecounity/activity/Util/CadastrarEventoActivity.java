@@ -16,6 +16,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class CadastrarEventoActivity extends AppCompatActivity {
     private EditText etNome, etData, etHorario, etLocal;
     private Button btnCadastrar;
@@ -32,6 +36,10 @@ public class CadastrarEventoActivity extends AppCompatActivity {
         etLocal = findViewById(R.id.et_local);
         btnCadastrar = findViewById(R.id.btn_cadastrar);
 
+        // Aplicando as máscaras
+        etData.addTextChangedListener(new MaskedWatcher("##/##/####", etData));
+        etHorario.addTextChangedListener(new MaskedWatcher("##:##", etHorario));
+
         db = FirebaseFirestore.getInstance();
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -42,26 +50,51 @@ public class CadastrarEventoActivity extends AppCompatActivity {
                 String horario = etHorario.getText().toString();
                 String local = etLocal.getText().toString();
 
-                Evento evento = new Evento(nome, data, horario, local);
-                db.collection("eventos").add(evento)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(CadastrarEventoActivity.this, "Evento cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                                etNome.setText("");
-                                etData.setText("");
-                                etHorario.setText("");
-                                etLocal.setText("");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(CadastrarEventoActivity.this, "Erro ao cadastrar evento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if (isValidDate(data) && isValidTime(horario)) {
+                    Evento evento = new Evento(nome, data, horario, local);
+                    db.collection("eventos").add(evento)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(CadastrarEventoActivity.this, "Evento cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                                    etNome.setText("");
+                                    etData.setText("");
+                                    etHorario.setText("");
+                                    etLocal.setText("");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(CadastrarEventoActivity.this, "Erro ao cadastrar evento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                } else {
+                    Toast.makeText(CadastrarEventoActivity.this, "Data ou horário inválidos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
 
+    private boolean isValidDate(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidTime(String time) {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        timeFormat.setLenient(false);
+        try {
+            timeFormat.parse(time);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 }

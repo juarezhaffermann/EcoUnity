@@ -1,12 +1,13 @@
 package com.example.ecounity.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecounity.R;
 import com.example.ecounity.activity.Util.ConfiguracaoBD;
@@ -56,7 +57,7 @@ public class CadastroActivity extends AppCompatActivity {
         if (!nome.isEmpty()) {
             if (!email.isEmpty()) {
                 if (!senha.isEmpty()) {
-                    // Bloco de código caso todos os campos estejam preenchidos
+
 
                     usuario = new Usuario();
 
@@ -66,15 +67,15 @@ public class CadastroActivity extends AppCompatActivity {
 
                     cadastrarUsuario();
                 } else {
-                    // Mensagem de erro caso a senha esteja vazia
+
                     Toast.makeText(this, "Preencha a senha", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                // Mensagem de erro caso o email esteja vazio
+
                 Toast.makeText(this, "Preencha o e-mail", Toast.LENGTH_SHORT).show();
             }
         } else {
-            // Mensagem de erro caso o nome esteja vazio
+
             Toast.makeText(this, "Preencha o nome", Toast.LENGTH_SHORT).show();
         }
     }

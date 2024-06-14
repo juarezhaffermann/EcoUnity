@@ -61,7 +61,7 @@ public class ConsultaActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
-                    // Reset the list to the original practices when query is empty
+
                     practiceAdapter.filterList(practiceAdapter.getOriginalPractices());
                 } else {
                     filterList(newText);
